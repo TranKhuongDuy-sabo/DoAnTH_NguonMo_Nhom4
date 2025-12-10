@@ -21,7 +21,7 @@ if (isset($_POST['btn_register'])) {
         // Tuy nhiên bảng USERS mình tạo lúc trước là VARCHAR(255) rồi nên yên tâm.
         // Ở đây mình lưu pass thường để bạn dễ test, thực tế nên dùng password_hash()
         
-        $sql = "INSERT INTO USERS (fullname, username, email_Ss, password) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO USERS (fullname, username, email, password) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         if ($stmt->execute([$fullname, $username, $email, $password])) {
             header("Location: login.php"); // Đăng ký xong chuyển qua trang đăng nhập

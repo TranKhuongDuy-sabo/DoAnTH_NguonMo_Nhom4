@@ -14,7 +14,7 @@ $params = [];
 
 // 1. Lọc theo Tên (nếu có nhập)
 if (!empty($keyword)) {
-    $sql .= "AND productname LIKE ?";
+    $sql .= " AND productname LIKE ?";
     $params[] = "%" . $keyword . "%";
 }
 

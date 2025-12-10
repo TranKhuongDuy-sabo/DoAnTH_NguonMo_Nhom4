@@ -140,7 +140,7 @@ try {
                 </div>
                 
                 <div class="row">
-                    <?php foreach ($product as $row): ?>
+                    <?php foreach ($products as $row): ?>
                         <div class="col-md-4 mb-4">
                             <div class="card h-100 shadow-sm product-card">
                                 <img src="uploads/<?php echo $row['id']; ?>.jpg" class="card-img-top" 

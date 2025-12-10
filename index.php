@@ -1,5 +1,5 @@
 <?php
-session_start(); // Khởi động session để biết ai đang đăng nhập
+session_start();
 require_once 'db_connect.php';
 
 // Lấy 8 sản phẩm mới nhất
@@ -23,9 +23,18 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             text-align: center;
         }
         .card-img-top { height: 200px; object-fit: contain; padding: 15px;}
+        
+        /* Hiệu ứng fade-in cho sản phẩm khi bấm xem thêm */
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -84,25 +93,31 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
    <div class="row" id="product-list">
     <?php 
     $count = 0; 
-    foreach ($products as $row): 
-        $count++;
-        
-        $hiddenClass = ($count > 8) ? 'product-hidden d-none' : '';
-    ?>
-        <div class="col-md-3 mb-4 <?php echo $hiddenClass; ?>">
-            <div class="card h-100 shadow-sm">
-                <img src="uploads/<?php echo $row['id']; ?>.jpg" class="card-img-top" onerror="this.src='https://via.placeholder.com/200'">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate"><?php echo htmlspecialchars($row['productname']); ?></h5>
-                    <p class="text-danger fw-bold"><?php echo number_format($row['price'], 0, ',', '.'); ?> đ</p>
-                    <a href="detail.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-primary w-100">Xem chi tiết</a>
+    // Kiểm tra biến $products có tồn tại không để tránh lỗi nếu database trống
+    if (!empty($products)) {
+        foreach ($products as $row): 
+            $count++;
+            $hiddenClass = ($count > 8) ? 'product-hidden d-none' : '';
+        ?>
+            <div class="col-md-3 mb-4 <?php echo $hiddenClass; ?>">
+                <div class="card h-100 shadow-sm">
+                    <img src="uploads/<?php echo $row['id']; ?>.jpg" class="card-img-top" onerror="this.src='https://via.placeholder.com/200'">
+                    <div class="card-body">
+                        <h5 class="card-title text-truncate"><?php echo htmlspecialchars($row['productname']); ?></h5>
+                        <p class="text-danger fw-bold"><?php echo number_format($row['price'], 0, ',', '.'); ?> đ</p>
+                        <a href="detail.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-primary w-100">Xem chi tiết</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; 
+    } else {
+        echo "<p class='text-center'>Chưa có sản phẩm nào.</p>";
+    }
+    ?>
+    </div>
 </div>
 
-<?php if(count($products) > 8): ?>
+<?php if(isset($products) && count($products) > 8): ?>
     <div class="text-center mt-3 mb-5">
         <button id="btn-load-more" class="btn btn-outline-secondary px-5 py-2 rounded-pill">
             Xem thêm <?php echo count($products) - 8; ?> sản phẩm <i class="bi bi-chevron-down"></i>
@@ -110,28 +125,20 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 <?php endif; ?>
 
-<footer class="bg-dark text-white text-center py-3">
+<footer class="bg-dark text-white text-center py-3 mt-auto w-100">
     &copy; 2025 Android Shop Project.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Bắt sự kiện khi bấm nút "Xem thêm"
     const loadMoreBtn = document.getElementById('btn-load-more');
-    
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', function() {
-            
             const hiddenProducts = document.querySelectorAll('.product-hidden');
-            
-            
             hiddenProducts.forEach(product => {
                 product.classList.remove('d-none');
-                
                 product.classList.add('fade-in'); 
             });
-            
-            // 3. Ẩn nút bấm đi sau khi đã hiện hết
             this.style.display = 'none';
         });
     }

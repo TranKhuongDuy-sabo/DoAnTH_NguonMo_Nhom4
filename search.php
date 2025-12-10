@@ -12,7 +12,7 @@ $filter_price = isset($_GET['price']) ? $_GET['price'] : '';
 $sql = "SELECT * FROM PRODUCTS WHERE 1=1"; // 1=1 giúp dễ dàng nối chuỗi AND phía sau
 $params = [];
 
-// 1. Lọc theo Tên (nếu có nhập)
+
 if (!empty($keyword)) {
     $sql .= " AND productname LIKE ?";
     $params[] = "%" . $keyword . "%";

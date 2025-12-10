@@ -2,7 +2,7 @@
 session_start();
 require_once 'db_connect.php';
 
-// Lấy 8 sản phẩm mới nhất
+
 $stmt = $conn->prepare("SELECT * FROM PRODUCTS ORDER BY id DESC ");
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);

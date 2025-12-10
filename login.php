@@ -8,7 +8,7 @@ if (isset($_POST['btn_login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM USERS-datas WHERE username = ? AND password = ?";
+    $sql = "SELECT * FROM USERS WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$username, $password]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);

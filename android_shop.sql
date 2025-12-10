@@ -105,11 +105,15 @@ CREATE TABLE IF NOT EXISTS `emails` (
 INSERT INTO `emails` (`id`, `message`, `createdate`, `name`, `email`, `userid`) VALUES
 (1, '12345 test', '2025-11-28 15:50:02', 'nguyen xuan duy', 'nguyenduyen2572@gmail.com', NULL);
 
+<<<<<<< HEAD
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `images`
 --
+=======
+
+>>>>>>> feature/backend
 
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
@@ -150,9 +154,13 @@ INSERT INTO `orderdetails` (`orderid`, `productid`, `quantity`, `price`, `total`
 
 -- --------------------------------------------------------
 
+<<<<<<< HEAD
 --
 -- Table structure for table `orders`
 --
+=======
+
+>>>>>>> feature/backend
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -182,9 +190,13 @@ INSERT INTO `orders` (`id`, `userid`, `total`, `address`, `note`, `status`, `pro
 
 -- --------------------------------------------------------
 
+<<<<<<< HEAD
 --
 -- Table structure for table `products`
 --
+=======
+
+>>>>>>> feature/backend
 
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (

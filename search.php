@@ -33,7 +33,7 @@ if (!empty($filter_rom)) {
 // 4. Lọc theo Giá
 if (!empty($filter_price)) {
     if ($filter_price == 'duoi-5tr') {
-        $sql .= " AND price > 5000000";
+        $sql .= " AND price < 5000000";
     } elseif ($filter_price == '5tr-10tr') {
         $sql .= " AND price BETWEEN 5000000 AND 10000000";
     } elseif ($filter_price == 'tren-10tr') {

@@ -86,7 +86,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td class="fw-bold"><?php echo htmlspecialchars($row['productname']); ?></td>
                             <td class="text-danger"><?php echo number_format($row['price'], 0, ',', '.'); ?> đ</td>
                             <td><?php echo $row['quantity']; ?></td>
-                            <td><span class="badge bg-info text-dark"><?php echo $row['categoryname']; ?></span></td>
+                            <td><span class="badge bg-info text-dark"><?php echo htmlspecialchars( $row['categoryname']); ?></span></td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
                                 <a href="admin_products.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa không?');">
